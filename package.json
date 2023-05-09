@@ -1,0 +1,25 @@
+{
+  "name": "management_system",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@types/node": "^20.1.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mysql2": "^3.3.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.15"
+  },
+  "scripts": {
+    "start": "ts-node-dev src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "description": ""
+}
