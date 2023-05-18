@@ -14,5 +14,9 @@ class DotenvConfig {
   static DB_PORT = process.env.DB_PORT!;
   static DB_USER = process.env.DB_USER;
   static DB_PASSWORD = process.env.DB_PASSWORD;
+
+  //JWT configuration
+  static ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET!;
+  static ACCESS_TOKEN_EXPIRES_IN = process.env.ACCESS_TOLEN_EXPIRES_IN!;
 }
 export default DotenvConfig;
