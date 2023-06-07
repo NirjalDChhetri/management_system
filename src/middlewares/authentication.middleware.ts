@@ -3,8 +3,6 @@ import HttpException from "../utils/HttpException";
 import messages from "../constant/messages";
 import JwtService from "../utils/jwt.utils";
 import DotenvConfig from "../config/env.config";
-import { Role } from "../constant/enum";
-import { User } from "../entities/user.entity";
 
 const authentication = async (
   req: Request,
