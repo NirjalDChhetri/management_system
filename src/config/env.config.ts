@@ -18,5 +18,7 @@ class DotenvConfig {
   //JWT configuration
   static ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET!;
   static ACCESS_TOKEN_EXPIRES_IN = process.env.ACCESS_TOLEN_EXPIRES_IN!;
+  static REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET!;
+  static REFRESH_TOKEN_EXPIRES_IN = process.env.REFRESH_TOKEN_EXPIRES_IN!;
 }
 export default DotenvConfig;

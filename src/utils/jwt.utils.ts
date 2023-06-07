@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken";
 import { IJwtPayload, IJwtOptions } from "../interfaces/jwt.interface";
+import { Role } from "../constant/enum";
 
 class JwtService {
-  static sign(user: IJwtPayload, options: IJwtOptions, role?: string) {
+  static sign(user: IJwtPayload, options: IJwtOptions, role: Role) {
     return jwt.sign(
       {
         id: user.id,
@@ -18,5 +19,7 @@ class JwtService {
   static verify(token: string, secret: string): any {
     return jwt.verify(token, secret);
   }
+
+generateAccessToken
 }
 export default JwtService;
