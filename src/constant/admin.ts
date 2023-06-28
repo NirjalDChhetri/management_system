@@ -1,9 +1,9 @@
 import { Role } from "./enum";
 
-export const Admin = [
+export const ADMINS = [
   {
-    name: "super admin",
-    email: "superadmin@gmail.com",
+    name: "Admin",
+    email: "admin@gmail.com",
     password: "Admin@123",
     role: Role.ADMIN,
   },
