@@ -12,7 +12,7 @@ class AuthController {
     const data = req.body;
     const ONE_DAY_AFTER = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
     const admin = await authService.adminLogin(data);
-    let token;
+    let token: any;
     if (admin.role) {
       token = JwtService.generateAccessToken(admin, Role.ADMIN);
     } else {
