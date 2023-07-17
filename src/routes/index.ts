@@ -1,5 +1,6 @@
 import { Router } from "express";
 import messages from "../constant/messages";
+import authRoutes from "./auth.routes";
 
 export type Route = {
   path: string;
@@ -8,7 +9,12 @@ export type Route = {
 
 const router = Router();
 
-const routes: Route[] = [];
+const routes: Route[] = [
+  {
+    path:'/auth',
+    route: authRoutes,
+  }
+];
 
 //*Instantiate all the routes
 routes.forEach((route) => {

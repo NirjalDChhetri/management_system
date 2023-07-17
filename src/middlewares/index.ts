@@ -12,7 +12,7 @@ const middlewares = (app: Application) => {
 
   app.use(express.urlencoded({ extended: true }));
 
-  app.use("/api", routes);
+  app.use("/api/v1", routes);
 };
 
 export default middlewares;
