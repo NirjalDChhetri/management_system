@@ -13,6 +13,12 @@ export class User extends CommonField {
   email: string;
 
   @Column({
+    name: "username",
+    select: true,
+  })
+  username: string;
+
+  @Column({
     name: "password",
     select: false,
   })
