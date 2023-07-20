@@ -3,6 +3,7 @@ import {
   IsNotEmpty,
   IsNotEmptyObject,
   IsOptional,
+  IsString,
   Validate,
   ValidateNested,
 } from "class-validator";
@@ -10,15 +11,15 @@ import { IsEmailExist } from "../customs/isEmailExist";
 import { IsStrongPassword } from "../customs/passwordStrength";
 
 export class UserDTO {
-  @IsNotEmptyObject()
-  @ValidateNested()
+  @IsString()
+  @IsNotEmpty()
   firstName: string;
 
   @IsOptional()
   middleName?: string;
 
-  @IsNotEmptyObject()
-  @ValidateNested()
+  @IsString()
+  @IsNotEmpty()
   lastName: string;
 
   @IsNotEmpty()
