@@ -16,7 +16,7 @@ export class User extends CommonField {
     name: "username",
     select: true,
   })
-  username: string;
+  firstname: string;
 
   @Column({
     name: "password",

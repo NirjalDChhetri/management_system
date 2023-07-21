@@ -5,7 +5,11 @@ import { User } from "../entities/user.entity";
 class UserService {
   constructor(private userRepository = AppDataSource.getRepository(User)) {}
 
-  async signup(data: UserDTO) {}
+  async signup(data: UserDTO) {
+    let user = new User();
+    
+
+  }
 }
 
 export default new UserService();
