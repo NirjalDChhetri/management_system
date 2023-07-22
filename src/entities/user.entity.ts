@@ -1,6 +1,7 @@
-import { Column, Entity } from "typeorm";
+import { BeforeInsert, Column, Entity } from "typeorm";
 import { CommonField } from "./commonEntity";
 import { Role } from "../constant/enum";
+import BcryptService from "../utils/bcrypt.utils";
 
 @Entity({
   name: "user",
@@ -16,7 +17,7 @@ export class User extends CommonField {
     name: "username",
     select: true,
   })
-  firstname: string;
+  username: string;
 
   @Column({
     name: "password",
@@ -30,4 +31,9 @@ export class User extends CommonField {
     default: Role.USER,
   })
   role: Role;
+
+  @BeforeInsert()
+  async hashedPassword() {
+    this.password = await BcryptService.hash(this.password);
+  }
 }

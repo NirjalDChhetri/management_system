@@ -13,14 +13,14 @@ import { IsStrongPassword } from "../customs/passwordStrength";
 export class UserDTO {
   @IsString()
   @IsNotEmpty()
-  firstName: string;
+  userName: string;
 
-  @IsOptional()
-  middleName?: string;
+  // @IsOptional()
+  // middleName?: string;
 
-  @IsString()
-  @IsNotEmpty()
-  lastName: string;
+  // @IsString()
+  // @IsNotEmpty()
+  // lastName: string;
 
   @IsNotEmpty()
   @IsEmail()
