@@ -3,7 +3,7 @@ import { validate } from "class-validator";
 import { Request, Response,NextFunction } from "express";
 import HttpException from "../utils/HttpException";
 
-export default class Validator {
+export default class RequestValidator {
   static validate = <T extends object>(classInstance: ClassConstructor<T>) => {
     return async (req: Request, res: Response, next: NextFunction) => {
       //Convert body to class Instance

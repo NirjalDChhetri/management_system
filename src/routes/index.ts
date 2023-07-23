@@ -1,6 +1,7 @@
 import { Router } from "express";
 import messages from "../constant/messages";
 import authRoutes from "./auth.routes";
+import userRoute from "./user.route"
 
 export type Route = {
   path: string;
@@ -13,6 +14,10 @@ const routes: Route[] = [
   {
     path:'/auth',
     route: authRoutes,
+  }, 
+  {
+    path:'/user',
+    route: userRoute
   }
 ];
 
