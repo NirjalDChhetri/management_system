@@ -2,17 +2,16 @@ import { Request, Response, NextFunction } from "express";
 import userService from "../services/user.service";
 import { UserDTO } from "../dtos/user.dto";
 import { StatusCodes } from "../constant/statusCodes";
+import messages from "../constant/messages";
 
 class UserController {
-  signup(req: Request, res: Response, next: NextFunction) {
+  async signup(req: Request, res: Response, next: NextFunction) {
     const data = req.body as UserDTO;
-    const newUser = userService.signup(data);
+    const newUser = await userService.signup(data);
     res.status(StatusCodes.SUCCESS).json({
       status: "success",
-      data: {
-        newUser,
-      },
-      message: "User Created Successfully",
+      data: newUser,
+      message: messages["userCreated"],
     });
   }
 }

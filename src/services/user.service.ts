@@ -12,11 +12,7 @@ class UserService {
     user.email = data.email;
     user.username = data.userName;
     user.password = data.password;
-    const newUser = await this.userRepository.save(user);
-    if (!newUser) {
-      throw new error("User not Saved");
-    }
-    return newUser;
+    return await this.userRepository.save(user);
   }
 }
 
