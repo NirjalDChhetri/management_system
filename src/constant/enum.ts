@@ -7,3 +7,8 @@ export enum TokenStatus {
   ACTIVE = "ACTIVE",
   INACTIVE = "INACTIVE",
 }
+
+export enum Mode {
+  BEARER = 'BEARER',
+  REFRESH = 'REFRESH'
+}
