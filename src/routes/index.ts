@@ -1,6 +1,6 @@
 import { Router } from "express";
 import messages from "../constant/messages";
-import authRoutes from "./auth.routes";
+import authRoute from "./auth.routes";
 import userRoute from "./user.route"
 
 export type Route = {
@@ -13,7 +13,7 @@ const router = Router();
 const routes: Route[] = [
   {
     path:'/auth',
-    route: authRoutes,
+    route: authRoute,
   }, 
   {
     path:'/user',
