@@ -25,6 +25,10 @@ class AuthController {
       message: messages["validLogin"],
     });
   }
+
+  async userLogin() {
+    
+  }
 }
 
 export default new AuthController();

@@ -3,7 +3,6 @@ import HttpException from "../utils/HttpException";
 import messages from "../constant/messages";
 import JwtService from "../utils/jwt.utils";
 import DotenvConfig from "../config/env.config";
-import { AppDataSource } from "../config/database.config";
 import { User } from "../entities/user.entity";
 import { Admin } from "../entities/admin.entity";
 import { Mode, Role } from "../constant/enum";
