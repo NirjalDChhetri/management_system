@@ -1,7 +1,8 @@
-import { BeforeInsert, Column, Entity } from "typeorm";
+import { BeforeInsert, Column, Entity, OneToMany } from "typeorm";
 import { CommonField } from "./commonEntity";
 import { Role } from "../constant/enum";
 import BcryptService from "../utils/bcrypt.utils";
+import Token from "./token.entity";
 
 @Entity({
   name: "user",
@@ -31,6 +32,12 @@ export class User extends CommonField {
     default: Role.USER,
   })
   role: Role;
+
+  @OneToMany(() => Token, (token) => token.user, {
+    nullable: true,
+    onDelete: "CASCADE",
+  })
+  tokens: Token[];
 
   @BeforeInsert()
   async hashedPassword() {

@@ -6,6 +6,7 @@ import HttpException from "../utils/HttpException";
 import messages from "../constant/messages";
 import tokenService from "../services/token.service";
 import { StatusCodes } from "../constant/statusCodes";
+import { LoginDTO } from "../dtos/login.dto";
 
 class AuthController {
   async adminLogin(req: Request, res: Response) {
@@ -26,8 +27,18 @@ class AuthController {
     });
   }
 
-  async userLogin() {
-    
+  async userLogin(req: Request, res: Response) {
+    const data = req.body as LoginDTO;
+    const ONE_DAY_AFTER = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
+    const user = await authService.userLogin(data);
+    console.log("I am User", user);
+    const token = JwtService.generateAccessToken(user, Role.USER);
+    await tokenService.create(token, ONE_DAY_AFTER, user);
+    res.status(StatusCodes.SUCCESS).json({
+      success: true,
+      accessToken: token,
+      message: messages["validLogin"],
+    });
   }
 }
 
