@@ -6,10 +6,6 @@ import authController from "../controllers/auth.controller";
 
 const router = Router();
 
-router.post(
-  "admin/login",
-  Validator.validate(LoginDTO),
-  catchAsync(authController.adminLogin)
-);
+router.post("/admin/login", Validator.validate(LoginDTO), catchAsync(authController.adminLogin));
 
 export default router;
