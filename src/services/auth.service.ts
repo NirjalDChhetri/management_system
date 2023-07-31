@@ -1,6 +1,6 @@
 import { AppDataSource } from "../config/database.config";
 import messages from "../constant/messages";
-import { LoginDTO } from "../dtos/login.dto";
+import { ChangePasswordDTO, LoginDTO } from "../dtos/login.dto";
 import { Admin } from "../entities/admin.entity";
 import { User } from "../entities/user.entity";
 import HttpException from "../utils/HttpException";
@@ -45,6 +45,29 @@ class AuthService {
       return findUser;
     }
     throw HttpException.badRequest(messages["invalidAuth"]);
+  }
+
+  async changePassword(data: ChangePasswordDTO, user: User) {
+    const { newPassword, oldPassword } = data;
+    const findUser = await this.userRepository.findOne({
+      where: {
+        id: user.id,
+      },
+      select: ["email", "password", "role", "id"],
+    });
+    if (!findUser) {
+      throw HttpException.notFound(messages["dataNotFound"]);
+    }
+    const isCorrectPassword = await BcryptService.compare(
+      oldPassword,
+      findUser.password
+    );
+    if (!isCorrectPassword) {
+      throw HttpException.badRequest(messages["invalidRequest"]);
+    }
+    findUser.password = await BcryptService.hash(newPassword);
+    await this.userRepository.save(findUser);
+    return findUser;
   }
 }
 

@@ -6,7 +6,7 @@ import HttpException from "../utils/HttpException";
 import messages from "../constant/messages";
 import tokenService from "../services/token.service";
 import { StatusCodes } from "../constant/statusCodes";
-import { LoginDTO } from "../dtos/login.dto";
+import { ChangePasswordDTO, LoginDTO } from "../dtos/login.dto";
 
 class AuthController {
   async adminLogin(req: Request, res: Response) {
@@ -38,6 +38,17 @@ class AuthController {
       success: true,
       accessToken: token,
       message: messages["validLogin"],
+    });
+  }
+
+  async changePassword(req: Request, res: Response) {
+    const data = req.body as ChangePasswordDTO;
+    const user = req.user;
+    await authService.changePassword(data, user);
+    res.status(StatusCodes.SUCCESS).json({
+      success: true,
+      data: user,
+      message: messages["updatePassword"],
     });
   }
 }
