@@ -25,3 +25,9 @@ export class ChangePasswordDTO {
   @IsNotEmpty()
   confirmPassword: string;
 }
+
+export class ForgotPasswordDTO {
+   @IsString()
+   @IsEmail()
+   email: string
+}

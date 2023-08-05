@@ -1,6 +1,6 @@
 import { AppDataSource } from "../config/database.config";
 import messages from "../constant/messages";
-import { ChangePasswordDTO, LoginDTO } from "../dtos/login.dto";
+import { ChangePasswordDTO, ForgotPasswordDTO, LoginDTO } from "../dtos/login.dto";
 import { Admin } from "../entities/admin.entity";
 import { User } from "../entities/user.entity";
 import HttpException from "../utils/HttpException";
@@ -68,6 +68,10 @@ class AuthService {
     findUser.password = await BcryptService.hash(newPassword);
     await this.userRepository.save(findUser);
     return findUser;
+  }
+
+  async forgotPassword(data: ForgotPasswordDTO) {
+
   }
 }
 

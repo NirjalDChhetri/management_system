@@ -6,7 +6,11 @@ import HttpException from "../utils/HttpException";
 import messages from "../constant/messages";
 import tokenService from "../services/token.service";
 import { StatusCodes } from "../constant/statusCodes";
-import { ChangePasswordDTO, LoginDTO } from "../dtos/login.dto";
+import {
+  ChangePasswordDTO,
+  ForgotPasswordDTO,
+  LoginDTO,
+} from "../dtos/login.dto";
 
 class AuthController {
   async adminLogin(req: Request, res: Response) {
@@ -50,6 +54,11 @@ class AuthController {
       data: user,
       message: messages["updatePassword"],
     });
+  }
+
+  async forgotPassword(req: Request, res: Response) {
+    const data = req.body as ForgotPasswordDTO;
+    await authService.forgotPassword(data);
   }
 }
 
