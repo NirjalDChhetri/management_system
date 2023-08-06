@@ -20,5 +20,12 @@ class DotenvConfig {
   static ACCESS_TOKEN_EXPIRES_IN = process.env.ACCESS_TOKEN_EXPIRES_IN!;
   static REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET!;
   static REFRESH_TOKEN_EXPIRES_IN = process.env.REFRESH_TOKEN_EXPIRES_IN!;
+
+  //Mail Configuration
+  static MAIL_HOST = process.env.MAIL_HOST;
+  static MAIL_PORT = +process.env.MAIL_PORT!;
+  static MAIL_USERNAME = process.env.MAIL_USERNAME;
+  static MAIL_PASSWORD = process.env.MAIL_PASSWORD;
+  static MAIL_FROM = process.env.MAIL_FROM;
 }
 export default DotenvConfig;
