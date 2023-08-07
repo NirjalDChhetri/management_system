@@ -1,3 +1,4 @@
+import { randomBytes } from "crypto";
 import { AppDataSource } from "../config/database.config";
 import messages from "../constant/messages";
 import { ChangePasswordDTO, ForgotPasswordDTO, LoginDTO } from "../dtos/login.dto";
@@ -71,6 +72,15 @@ class AuthService {
   }
 
   async forgotPassword(data: ForgotPasswordDTO) {
+    const user = await this.userRepository.findOne({
+      where: {
+        email: data.email
+      }
+    })
+    if(!user) {
+      throw HttpException.badRequest('email doesnot exist')
+    }
+    let code = randomBytes(6).toString('hex')
 
   }
 }
