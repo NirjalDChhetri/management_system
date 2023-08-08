@@ -3,6 +3,7 @@ import { CommonField } from "./commonEntity";
 import { Role } from "../constant/enum";
 import BcryptService from "../utils/bcrypt.utils";
 import Token from "./token.entity";
+import { ResetPassword } from "./resetPassword.entity";
 
 @Entity({
   name: "user",
@@ -38,6 +39,9 @@ export class User extends CommonField {
     onDelete: "CASCADE",
   })
   tokens: Token[];
+
+  @OneToMany(() => ResetPassword, (resetPassword) => resetPassword.user)
+  resetPassword: ResetPassword[]
 
   @BeforeInsert()
   async hashedPassword() {
