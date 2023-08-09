@@ -59,4 +59,4 @@ const authentication =
       );
     }
   };
-export default authentication();
+export default authentication;
