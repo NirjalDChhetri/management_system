@@ -27,5 +27,8 @@ class DotenvConfig {
   static MAIL_USERNAME = process.env.MAIL_USERNAME;
   static MAIL_PASSWORD = process.env.MAIL_PASSWORD;
   static MAIL_FROM = process.env.MAIL_FROM;
+
+  //Base_URL Server Information
+  static BASE_URL = process.env.BASE_URL!
 }
 export default DotenvConfig;

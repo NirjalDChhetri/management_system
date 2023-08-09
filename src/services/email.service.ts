@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 import DotenvConfig from "../config/env.config";
 import { IMailOptions } from "../interfaces/mailOptions.interface";
+import { generateHtmlForgetPassword } from "../templates/email/resetPasswordHtml";
 
 class EmailService {
   transporter: nodemailer.Transporter<SMTPTransport.SentMessageInfo>;
@@ -30,4 +31,16 @@ class EmailService {
     };
     return await this.transporter.sendMail(mailOptions);
   }
+
+async sendResetMail(link: string, user:string) {
+  this.sendMail({
+    to: user,
+    subject: 'Confirm your account',
+    text: 'Reset Your Password',
+    html: generateHtmlForgetPassword(link),
+    from: DotenvConfig.MAIL_HOST!,
+  })
 }
+}
+
+export default new EmailService();

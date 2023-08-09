@@ -7,11 +7,15 @@ import { User } from "../entities/user.entity";
 import HttpException from "../utils/HttpException";
 import BcryptService from "../utils/bcrypt.utils";
 import JwtService from "../utils/jwt.utils";
+import { ResetPassword } from "../entities/resetPassword.entity";
+import emailService from "./email.service";
+import DotenvConfig from "../config/env.config";
 
 class AuthService {
   constructor(
     private adminRepository = AppDataSource.getRepository(Admin),
-    private userRepository = AppDataSource.getRepository(User)
+    private userRepository = AppDataSource.getRepository(User),
+    private resetPasswordRepository = AppDataSource.getRepository(ResetPassword)
   ) {}
   async adminLogin(data: LoginDTO) {
     const findAdmin = await this.adminRepository.findOne({
@@ -74,14 +78,19 @@ class AuthService {
   async forgotPassword(data: ForgotPasswordDTO) {
     const user = await this.userRepository.findOne({
       where: {
-        email: data.email
-      }
-    })
-    if(!user) {
-      throw HttpException.badRequest('email doesnot exist')
+        email: data.email,
+      },
+    });
+    if (!user) {
+      throw HttpException.badRequest("email doesnot exist");
     }
-    let code = randomBytes(6).toString('hex')
-
+    let code = randomBytes(6).toString("hex");
+    let resetToken = new ResetPassword();
+    resetToken.user = user;
+    resetToken.token = code;
+    emailService.sendResetMail(
+      `${DotenvConfig.BASE_URL}/auth/reset-password?token=${code}`, user.email);
+    return await this.resetPasswordRepository.save(resetToken)
   }
 }
 
