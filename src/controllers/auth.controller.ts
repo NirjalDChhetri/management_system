@@ -26,7 +26,7 @@ class AuthController {
     await tokenService.create(token, ONE_DAY_AFTER, admin);
     res.status(StatusCodes.SUCCESS).json({
       success: true,
-      accessToken: token,
+      token: token,
       message: messages["validLogin"],
     });
   }
@@ -35,7 +35,6 @@ class AuthController {
     const data = req.body as LoginDTO;
     const ONE_DAY_AFTER = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
     const user = await authService.userLogin(data);
-    console.log("I am User", user);
     const token = JwtService.generateAccessToken(user, Role.USER);
     await tokenService.create(token, ONE_DAY_AFTER, user);
     res.status(StatusCodes.SUCCESS).json({
@@ -59,6 +58,10 @@ class AuthController {
   async forgotPassword(req: Request, res: Response) {
     const data = req.body as ForgotPasswordDTO;
     await authService.forgotPassword(data);
+    res.status(StatusCodes.SUCCESS).json({
+      success: true,
+      message: "Check your mail",
+    });
   }
 }
 
