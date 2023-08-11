@@ -9,7 +9,7 @@ import { Mode, Role } from "../constant/enum";
 import { StatusCodes } from "../constant/statusCodes";
 
 const authentication =
-  (_userRole?: Role) =>
+  (userRole?: Role) =>
   async (req: Request, res: Response, next: NextFunction) => {
     const { authorization } = req?.headers;
 
