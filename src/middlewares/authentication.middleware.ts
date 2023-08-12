@@ -8,9 +8,7 @@ import { Admin } from "../entities/admin.entity";
 import { Mode, Role } from "../constant/enum";
 import { StatusCodes } from "../constant/statusCodes";
 
-const authentication =
-  (userRole?: Role) =>
-  async (req: Request, res: Response, next: NextFunction) => {
+const authentication = (_userRole?: Role) => async (req: Request, res: Response, next: NextFunction) => {
     const { authorization } = req?.headers;
 
     if (!authorization) {
