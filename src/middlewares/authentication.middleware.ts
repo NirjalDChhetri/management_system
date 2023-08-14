@@ -2,11 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import HttpException from "../utils/HttpException";
 import messages from "../constant/messages";
 import JwtService from "../utils/jwt.utils";
-import DotenvConfig from "../config/env.config";
 import { User } from "../entities/user.entity";
-import { Admin } from "../entities/admin.entity";
-import { Mode, Role } from "../constant/enum";
-import { StatusCodes } from "../constant/statusCodes";
 import { AppDataSource } from "../config/database.config";
 
 const authentication = async (
