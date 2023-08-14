@@ -21,7 +21,7 @@ router.post(
 );
 router.post(
   "/change-password",
-  authentication(Role.USER),
+  authentication,
   Validator.validate(ChangePasswordDTO),
   catchAsync(authController.changePassword)
 );
