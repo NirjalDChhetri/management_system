@@ -8,29 +8,20 @@ import { Admin } from "../entities/admin.entity";
 import { Mode, Role } from "../constant/enum";
 import { StatusCodes } from "../constant/statusCodes";
 
-const authentication = (_userRole?: Role) => async (req: Request, res: Response, next: NextFunction) => {
-    const { authorization } = req?.headers;
-
-    if (!authorization) {
-      return next(HttpException.badRequest(messages.unAuthorized));
+const authentication =
+  (_userRole?: Role) =>
+  async (req: Request, res: Response, next: NextFunction) => {
+    let token = req.headers.authorization && req.headers.authorization.split(" ")[1];
+    if (!token) {
+      return next(HttpException.badRequest(messages["unAuthorized"]));
     }
-
-    const data = authorization.trim().split(" ");
-
-    if (data.length !== 2 || data[0] !== "BEARER") {
-      return next(HttpException.badRequest(messages.unAuthorized));
-    }
-
-    const mode = data[0];
-    const token = data[1];
     try {
-      let data: any;
-      if (mode === Mode.BEARER)
-        data = JwtService.verify(token, DotenvConfig.ACCESS_TOKEN_SECRET);
-      else throw HttpException.badRequest(messages.unAuthorized);
-      const { id, role } = data;
+      const payload = await JwtService.verify(
+        token,
+        DotenvConfig.ACCESS_TOKEN_SECRET
+      );
+      const { id, email, role } = payload;
       let user: any;
-
       switch (role) {
         case Role.ADMIN:
           user = await Admin.findOne({
@@ -47,8 +38,7 @@ const authentication = (_userRole?: Role) => async (req: Request, res: Response,
           if (!user) {
             throw HttpException.badRequest(messages["unAuthorized"]);
           }
-          const { password, createdAt, deletedAt, updatedAt, ...rest } = user;
-          req.user = rest;
+          req.user = user;
           return next();
       }
     } catch (err: any) {
@@ -57,4 +47,5 @@ const authentication = (_userRole?: Role) => async (req: Request, res: Response,
       );
     }
   };
+
 export default authentication;
