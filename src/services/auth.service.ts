@@ -1,7 +1,12 @@
 import { randomBytes } from "crypto";
 import { AppDataSource } from "../config/database.config";
 import messages from "../constant/messages";
-import { ChangePasswordDTO, ForgotPasswordDTO, LoginDTO } from "../dtos/login.dto";
+import {
+  ChangePasswordDTO,
+  ForgotPasswordDTO,
+  LoginDTO,
+  ResetPasswordDTO,
+} from "../dtos/login.dto";
 import { Admin } from "../entities/admin.entity";
 import { User } from "../entities/user.entity";
 import HttpException from "../utils/HttpException";
@@ -10,6 +15,7 @@ import JwtService from "../utils/jwt.utils";
 import { ResetPassword } from "../entities/resetPassword.entity";
 import emailService from "./email.service";
 import DotenvConfig from "../config/env.config";
+import { MoreThan } from "typeorm";
 
 class AuthService {
   constructor(
@@ -89,8 +95,32 @@ class AuthService {
     resetToken.user = user;
     resetToken.token = code;
     emailService.sendResetMail(
-      `${DotenvConfig.BASE_URL}/auth/reset-password?token=${code}`, user.email);
-    return await this.resetPasswordRepository.save(resetToken)
+      `${DotenvConfig.BASE_URL}/auth/reset-password?token=${code}`,
+      user.email
+    );
+    return await this.resetPasswordRepository.save(resetToken);
+  }
+
+  async setNewPassword(data: ResetPasswordDTO) {
+    let resetToken = await this.resetPasswordRepository.findOne({
+      where: {
+        token: data.code,
+        expiresIn: MoreThan(Date.now()),
+        status: true,
+      },
+      relations: {
+        user: true,
+      },
+    });
+    if (!resetToken) {
+      throw HttpException.badRequest("Not found");
+    }
+    if (resetToken.user) {
+      resetToken.user.password = data.newPassword;
+      await resetToken.user.save();
+    }
+    resetToken.status = false;
+    await resetToken.save();
   }
 }
 

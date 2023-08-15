@@ -4,6 +4,7 @@ import {
   ChangePasswordDTO,
   ForgotPasswordDTO,
   LoginDTO,
+  ResetPasswordDTO,
 } from "../dtos/login.dto";
 import { catchAsync } from "../utils/catchAsync";
 import authController from "../controllers/auth.controller";
@@ -34,6 +35,12 @@ router.post(
   "/forgot-password",
   Validator.validate(ForgotPasswordDTO),
   catchAsync(authController.forgotPassword)
+);
+
+router.post(
+  "/reset-password",
+  Validator.validate(ResetPasswordDTO),
+  catchAsync(authController.resetPassword)
 );
 
 export default router;

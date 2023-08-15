@@ -10,6 +10,7 @@ import {
   ChangePasswordDTO,
   ForgotPasswordDTO,
   LoginDTO,
+  ResetPasswordDTO,
 } from "../dtos/login.dto";
 
 class AuthController {
@@ -62,6 +63,11 @@ class AuthController {
       success: true,
       message: "Check your mail",
     });
+  }
+
+  async resetPassword(req: Request, res: Response) {
+    const data = req.body as ResetPasswordDTO
+    const setPassword = await authService.setNewPassword(data)
   }
 }
 
