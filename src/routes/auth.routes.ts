@@ -1,6 +1,10 @@
 import { Router } from "express";
 import Validator from "../middlewares/Request.Validator";
-import { ChangePasswordDTO, LoginDTO } from "../dtos/login.dto";
+import {
+  ChangePasswordDTO,
+  ForgotPasswordDTO,
+  LoginDTO,
+} from "../dtos/login.dto";
 import { catchAsync } from "../utils/catchAsync";
 import authController from "../controllers/auth.controller";
 import authentication from "../middlewares/authentication.middleware";
@@ -24,6 +28,12 @@ router.post(
   authentication,
   Validator.validate(ChangePasswordDTO),
   catchAsync(authController.changePassword)
+);
+
+router.post(
+  "/forgot-password",
+  Validator.validate(ForgotPasswordDTO),
+  catchAsync(authController.forgotPassword)
 );
 
 export default router;

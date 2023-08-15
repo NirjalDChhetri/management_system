@@ -13,7 +13,7 @@ export const generateHtmlForgetPassword = (link: string) => {
         href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
         rel="stylesheet"
       />
-      <title>OPT Verification</title>
+      <title>Reset Password</title>
     </head>
     <style>
       * {
@@ -60,8 +60,7 @@ export const generateHtmlForgetPassword = (link: string) => {
         <h2>OTP Verification</h2>
         <h4>Hello,</h4>
         <h4>
-          Please use the verification code below on the wada kanoon
-          Delivery App
+          Please, Click on the Link to change the Password!!!
         </h4>
         <!-- replace OPT  -->
         <p><a href=${link}>Click here </a> to change password.</p>
