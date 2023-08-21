@@ -6,12 +6,7 @@ import HttpException from "../utils/HttpException";
 import messages from "../constant/messages";
 import tokenService from "../services/token.service";
 import { StatusCodes } from "../constant/statusCodes";
-import {
-  ChangePasswordDTO,
-  ForgotPasswordDTO,
-  LoginDTO,
-  ResetPasswordDTO,
-} from "../dtos/login.dto";
+import { ChangePasswordDTO, ForgotPasswordDTO, LoginDTO, ResetPasswordDTO, } from "../dtos/login.dto";
 
 class AuthController {
   async adminLogin(req: Request, res: Response) {
@@ -66,8 +61,13 @@ class AuthController {
   }
 
   async resetPassword(req: Request, res: Response) {
-    const data = req.body as ResetPasswordDTO
-    const setPassword = await authService.setNewPassword(data)
+    const data = req.body as ResetPasswordDTO;
+    const setPassword = await authService.setNewPassword(data);
+    res.status(StatusCodes.SUCCESS).json({
+      success: true,
+      data: setPassword,
+      message: "Password reset Successfully",
+    });
   }
 }
 

@@ -57,7 +57,7 @@ export const generateHtmlForgetPassword = (link: string) => {
     </style>
     <body>
       <div class="box">
-        <h2>OTP Verification</h2>
+        <h2>Reset Password/h2>
         <h4>Hello,</h4>
         <h4>
           Please, Click on the Link to change the Password!!!

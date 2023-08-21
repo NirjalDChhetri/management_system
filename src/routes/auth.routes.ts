@@ -1,16 +1,9 @@
 import { Router } from "express";
 import Validator from "../middlewares/Request.Validator";
-import {
-  ChangePasswordDTO,
-  ForgotPasswordDTO,
-  LoginDTO,
-  ResetPasswordDTO,
-} from "../dtos/login.dto";
+import { ChangePasswordDTO, ForgotPasswordDTO, LoginDTO, ResetPasswordDTO, } from "../dtos/login.dto";
 import { catchAsync } from "../utils/catchAsync";
 import authController from "../controllers/auth.controller";
 import authentication from "../middlewares/authentication.middleware";
-import { User } from "../entities/user.entity";
-import { Role } from "../constant/enum";
 
 const router = Router();
 

@@ -95,7 +95,7 @@ class AuthService {
     resetToken.user = user;
     resetToken.token = code;
     emailService.sendResetMail(
-      `${DotenvConfig.BASE_URL}/auth/reset-password?token=${code}`,
+      `${DotenvConfig.BASE_URL}/aip/v1/auth/reset-password?token=${code}`,
       user.email
     );
     return await this.resetPasswordRepository.save(resetToken);
